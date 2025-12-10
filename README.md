@@ -73,3 +73,7 @@ file footer.php.
 file sidebar.php.
 ###### ![Gambar 1](ss/hey18.png)
 
+Output
+###### ![Gambar 1](ss/hey19.png)
+###### ![Gambar 1](ss/hey20.png)
+###### ![Gambar 1](ss/hey21.png)
