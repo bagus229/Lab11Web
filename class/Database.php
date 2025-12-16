@@ -18,7 +18,10 @@ class Database {
         }
     }
 
-    // Insert data ke tabel
+    public function getConnection() {
+        return $this->conn;
+    }
+
     public function insert($table, $data) {
         $columns = implode(", ", array_keys($data));
         $values  = "'" . implode("', '", array_map([$this, 'escape'], $data)) . "'";

@@ -1,25 +1,44 @@
 <?php
+session_start();
 
-require "class/Database.php";
-require "class/Form.php";
 
-$path = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/artikel/index';
+require_once __DIR__ . "/config.php";
+require_once __DIR__ . "/class/Database.php";
+require_once __DIR__ . "/class/Form.php";
 
-$segments = explode('/', trim($path, '/'));
+
+$path = $_SERVER['PATH_INFO'] ?? '/artikel/index';
+$segments = array_values(array_filter(explode('/', $path)));
 
 $mod  = $segments[0] ?? 'artikel';
 $page = $segments[1] ?? 'index';
 
-$file = "module/$mod/$page.php";
+$file = __DIR__ . "/module/$mod/$page.php";
 
-require "template/header.php";
-require "template/sidebar.php";
 
-if (file_exists($file)) {
-    require $file;
-} else {
-    echo "<h3>Module tidak ditemukan: $mod/$page</h3>";
+$public_modules = ['artikel', 'user'];
+
+if (!in_array($mod, $public_modules)) {
+    if (!isset($_SESSION['is_login'])) {
+        header("Location: index.php/user/login");
+        exit;
+    }
 }
 
-require "template/footer.php";
-?>
+
+if (file_exists($file)) {
+
+    if ($mod === 'user' && $page === 'login') {
+        require $file;
+    } else {
+        require __DIR__ . "/template/header.php";
+        require __DIR__ . "/template/sidebar.php";
+        require $file;
+        require __DIR__ . "/template/footer.php";
+    }
+
+} else {
+    require __DIR__ . "/template/header.php";
+    echo "<h3>Module tidak ditemukan: $mod/$page</h3>";
+    require __DIR__ . "/template/footer.php";
+}

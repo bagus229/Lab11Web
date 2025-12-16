@@ -5,7 +5,7 @@
 ## Kelas: TI.24.A.3
 ## Mata Kuliah: Pemrograman Web 1
 
-## Langkah-langkah Praktikum
+## Langkah-langkah Praktikum Pertemuan 13
 
 ## A.Memepersiapkan struktur folder
 ###### ![Gambar 1](ss/hey1.png)
@@ -77,3 +77,51 @@ Output
 ###### ![Gambar 1](ss/hey19.png)
 ###### ![Gambar 1](ss/hey20.png)
 ###### ![Gambar 1](ss/hey21.png)
+
+### Langkah-Langkah Praktikum Pertemuan 14
+A. Persiapan Database
+Membutuhkan tabel untuk menyimpan data pengguna (admin).
+
+1. Buat Tabel users
+Jalankan SQL berikut di phpMyAdmin pada database latihan_oop:
+###### ![Gambar 1](ss/hey22.png)
+
+2. Insert Data Dummy (User Admin)
+Password harus di-hash (dienkripsi).
+###### ![Gambar 1](ss/hey23.png)
+
+B. Update Routing (index.php)
+Kita perlu memodifikasi index.php agar mengecek apakah user sudah login atau belum
+sebelum membuka halaman tertentu.
+###### ![Gambar 1](ss/hey24.png)
+
+C. Membuat Modul User (Login & Logout)
+Buat folder baru: module/user/.
+
+1. File: module/user/login.php
+Halaman ini berisi Form Login dan logika pemrosesan saat tombol submit ditekan.
+###### ![Gambar 1](ss/hey25.png)
+
+2. File: module/user/logout.php
+File untuk menghapus session.
+###### ![Gambar 1](ss/hey26.png)
+
+D. Penyesuaian Tampilan (Header)
+Kita perlu mengubah template/header.php agar menu navigasi berubah dinamis:
+● Jika Belum Login: Tampilkan menu Home dan Login.
+● Jika Sudah Login: Tampilkan menu Home, Artikel, dan Logout.
+Update template/header.php:
+###### ![Gambar 1](ss/hey27.png)
+
+### Tugas Praktikum 14
+Login. module/user/login.php berfungsi sebagai halaman dan proses autentikasi pengguna dalam aplikasi PHP modular berbasis OOP. File ini dibuat untuk pintu masuk utama bagi user untuk mengakses sistem.
+###### ![Gambar 1](ss/hey29.png)
+
+Logout berfungsi untuk mengakhiri sesi login pengguna. Ketika user memilih menu logout.
+###### ![Gambar 1](ss/hey28.png)
+
+Profile berfungsi untuk menampilkan informasi akun pengguna yang sedang login. File ini terlebih dahulu melakukan pengecekan session untuk memastikan bahwa user telah login. Jika session tidak ditemukan, user akan langsung diarahkan ke halaman login. Setelah itu, profile.php mengambil data user dari tabel users berdasarkan username yang tersimpan di session, lalu menampilkannya dalam bentuk halaman profil.
+###### ![Gambar 1](ss/hey30.png)
+
+Database tabel.
+###### ![Gambar 1](ss/database.png)
